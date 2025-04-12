@@ -5,43 +5,7 @@
  * @returns {boolean}
  */
 export const detectDevTools = () => {
-  // Method 1: Element sizing difference detection
-  const devToolsDetection = () => {
-    const widthThreshold = 160; // Threshold for width difference
-    const heightThreshold = 160; // Threshold for height difference
-    
-    const emitEvent = () => {
-      window.dispatchEvent(new CustomEvent('devtoolschange', { detail: { isOpen: true } }));
-    };
-    
-    // Check for size discrepancies that occur when dev tools are open
-    const checkWindowSize = () => {
-      // Get zoom level
-      const zoomLevel = window.devicePixelRatio || 1;
-      
-      // Calculate expected differences based on zoom
-      const expectedWidthDiff = window.outerWidth * (1 - 1/zoomLevel);
-      const expectedHeightDiff = window.outerHeight * (1 - 1/zoomLevel);
-      
-      // Calculate actual differences
-      const actualWidthDiff = window.outerWidth - window.innerWidth;
-      const actualHeightDiff = window.outerHeight - window.innerHeight;
-      
-      // Compare with threshold, accounting for expected zoom differences
-      if (
-        Math.abs(actualWidthDiff - expectedWidthDiff) > widthThreshold ||
-        Math.abs(actualHeightDiff - expectedHeightDiff) > heightThreshold
-      ) {
-        emitEvent();
-        return true;
-      }
-      return false;
-    };
-
-    return checkWindowSize();
-  };
-
-  // Method 2: Using console.log formatting (DevTools-specific behavior)
+ 
   const consoleDetection = () => {
     const isFirebug = () => {
       return window.console && (window.console.firebug || window.console.table && /firebug/i.test(window.console.table.toString()));
@@ -75,7 +39,7 @@ export const detectDevTools = () => {
     return isFirebug() || isChromiumDevtools();
   };
   
-  return devToolsDetection() || consoleDetection();
+  return consoleDetection();
 };
 
 /**

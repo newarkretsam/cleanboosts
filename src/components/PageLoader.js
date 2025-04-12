@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import styles from './PageLoader.module.css';
 
 const PageLoader = () => {
@@ -8,7 +9,7 @@ const PageLoader = () => {
     <div className={styles.pageLoaderContainer}>
       <div className={styles.loaderContent}>
         <div className={styles.imageContainer}>
-          <img
+          <Image
             src="/image/rotatingLogo.gif"
             alt="Loading..."
             className={styles.loaderImage}
