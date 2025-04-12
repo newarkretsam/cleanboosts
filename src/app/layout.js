@@ -17,9 +17,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AntiSkidProvider>
+        {/* <AntiSkidProvider> */}
           {children}
-        </AntiSkidProvider>
+        {/* </AntiSkidProvider> */}
         <Script src="/js/protection.js" strategy="beforeInteractive" />
       </body>
     </html>
