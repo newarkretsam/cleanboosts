@@ -9,11 +9,11 @@ import useAntiSkid from '@/hooks/useAntiSkid';
 const AntiSkidProvider = ({ children }) => {
   // Use the anti-skid hook with default settings
   useAntiSkid({
-    disableSelection: true,
-    disableContextMenu: true,
-    blockDevKeys: true,
-    obscureOnDevTools: true,
-    showConsoleWarning: true
+    disableSelection: false,
+    disableContextMenu: false,
+    blockDevKeys: false,
+    obscureOnDevTools: false,
+    showConsoleWarning: false
   });
 
   return <>{children}</>;
