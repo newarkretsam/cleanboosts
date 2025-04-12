@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         {/* <AntiSkidProvider> */}
           {children}
         {/* </AntiSkidProvider> */}
-        <Script src="/js/protection.js" strategy="beforeInteractive" />
+        {/* <Script src="/js/protection.js" strategy="beforeInteractive" /> */}
       </body>
     </html>
   );
