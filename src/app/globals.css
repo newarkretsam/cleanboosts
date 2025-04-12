@@ -1,0 +1,1508 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Markazi+Text:wght@400..700&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Silkscreen:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --magenta-primary: #ff00ff;
+  --magenta-light: #ff33ff;
+  --magenta-dark: #cc00cc;
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 150px; /* Added to prevent content hiding behind fixed nav */
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  padding-top: env(safe-area-inset-top, 0);
+  min-height: 100vh;
+}
+
+.galaxy-bg {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    
+    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+  background-size: 
+    cover,
+    550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 
+    center center,
+    0 0, 40px 60px, 130px 270px, 70px 100px;
+  background-repeat: no-repeat, repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.galaxy-bg:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(255, 0, 255, 0.6) 50%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.galaxy-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse 2s infinite;
+  border-radius: 50%;
+}
+
+.animate-border-pulse {
+  animation: pulseBorder 2s infinite;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-10px) translateX(10px);
+  }
+  66% {
+    transform: translateY(10px) translateX(-10px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.2;
+    box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.4);
+  }
+  50% {
+    opacity: 0.3;
+    box-shadow: 0 0 0 15px rgba(255, 0, 255, 0);
+  }
+}
+
+@keyframes pulseBorder {
+  0% {
+    border-color: rgba(255, 0, 255, 0.7); /* magenta */
+    box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.4);
+  }
+  70% {
+    border-color: rgb(255, 0, 255); /* magenta */
+    box-shadow: 0 0 0 10px rgba(255, 0, 255, 0);
+  }
+  100% {
+    border-color: rgb(255, 0, 255); /* magenta */
+    box-shadow: 0 0 0 10px rgba(255, 0, 255, 0);
+  }
+}
+
+/* Enhanced mist effect animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes float-reverse {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float-slow-reverse {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(10px) translateX(-10px);
+  }
+  66% {
+    transform: translateY(-10px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 7s ease-in-out infinite;
+}
+
+.animate-float-slow-reverse {
+  animation: float-slow-reverse 9s ease-in-out infinite;
+}
+
+.animate-float-override {
+  animation: float 6s ease-in-out infinite !important;
+}
+
+/* Pink Neon Border for Products - Standardized colors with pure magenta */
+.neon-pink-border {
+  position: relative;
+  border-radius: 12px;
+  z-index: 1;
+  overflow: visible !important;
+}
+
+.neon-pink-border::after, 
+.neon-pink-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background-image: conic-gradient(from var(--angle), rgb(255, 0, 255), rgb(230, 0, 255), rgb(255, 0, 255), rgb(230, 0, 255));
+  border-radius: 12px;
+  z-index: -1;
+  animation: 4s rotate-border linear infinite;
+}
+
+/* Create a class for sections that need full-height crystal backgrounds */
+.crystal-section {
+  position: relative;
+  background: transparent;
+  z-index: 2;
+  left:0;
+}
+
+/* Enhanced Glassmorphism card with more prominent moving border animation */
+.glass-card-moving-border {
+  position: relative;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  z-index: 1;
+  will-change: transform, box-shadow;
+  isolation: isolate;
+}
+
+.glass-card-moving-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  padding: 2px;
+  background: linear-gradient(
+    var(--angle),
+    rgba(255, 0, 255, 0.9),    /* magenta */
+    rgba(255, 51, 255, 0.9),   /* lighter magenta */
+    rgba(230, 0, 255, 0.9),    /* slightly purple-magenta */
+    rgba(255, 0, 230, 0.9),    /* slightly pink-magenta */
+    rgba(255, 0, 255, 0.9)     /* magenta */
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: rotate-border 4s linear infinite, border-opacity-pulse 3s ease-in-out infinite;
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 
+    0 0 15px rgba(255, 0, 255, 0.5),
+    0 0 30px rgba(230, 0, 255, 0.3);
+}
+
+.glass-card-moving-border:hover::before {
+  background: linear-gradient(
+    var(--angle),
+    rgba(255, 0, 255, 1),
+    rgba(255, 51, 255, 1),
+    rgba(230, 0, 255, 1),
+    rgba(255, 0, 230, 1),
+    rgba(255, 0, 255, 1)
+  );
+  animation: rotate-border 2s linear infinite, border-opacity-pulse 1.5s ease-in-out infinite;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 255, 0.7),
+    0 0 40px rgba(230, 0, 255, 0.5);
+}
+
+.glass-card-moving-border::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 16px;
+  background: linear-gradient(
+    var(--angle),
+    rgba(255, 0, 255, 0.8),
+    rgba(255, 51, 255, 0.8),
+    rgba(230, 0, 255, 0.8),
+    rgba(255, 0, 230, 0.8),
+    rgba(255, 0, 255, 0.8)
+  );
+  filter: blur(20px);
+  opacity: 0.4;
+  z-index: -2;
+  animation: rotate-border 6s linear infinite reverse;
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.glass-card-moving-border:hover::after {
+  filter: blur(25px);
+  opacity: 0.6;
+  inset: -8px;
+}
+
+/* Updated animations for border effects */
+@keyframes rotate-border {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+@keyframes border-opacity-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.glass-card-border {
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  z-index: 1;
+  will-change: transform, box-shadow;
+}
+
+.glass-card-border::before {
+  content: '';
+  inset: -2px;
+  border-radius: 14px;
+  padding: 2px;
+  background: linear-gradient(
+    var(--angle),
+    rgba(255, 0, 255, 0.7),
+    rgba(230, 0, 255, 0.7),
+    rgba(255, 0, 255, 0.7),
+    rgba(230, 0, 255, 0.7),
+    rgba(255, 0, 255, 0.7)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: rotate-border 6s linear infinite, border-opacity-pulse 4s ease-in-out infinite;
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.glass-card-moving-border:hover::before {
+  background: linear-gradient(
+    var(--angle),
+    rgba(255, 0, 255, 0.9),
+    rgba(230, 0, 255, 0.9),
+    rgba(255, 0, 255, 0.9),
+    rgba(230, 0, 255, 0.9),
+    rgba(255, 0, 255, 0.9)
+  );
+  animation: rotate-border 3s linear infinite, border-opacity-pulse 2s ease-in-out infinite;
+}
+
+.glass-card-moving-border::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: linear-gradient(
+    var(--angle),
+    rgba(255, 0, 255, 0.8),
+    rgba(230, 0, 255, 0.8),
+    rgba(255, 0, 255, 0.8),
+    rgba(230, 0, 255, 0.8),
+    rgba(255, 0, 255, 0.8)
+  );
+  filter: blur(15px);
+  opacity: 0.3;
+  z-index: -2;
+  animation: rotate-border 4s linear infinite reverse;
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Shine effect for cards */
+.glass-card-moving-border .shine-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  transition: all 0s;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.glass-card-moving-border:hover .shine-effect {
+  transform: translateX(100%);
+  opacity: 1;
+  transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Card button hover effect */
+.card-button {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
+}
+
+.card-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(236, 72, 153, 0.3);
+}
+
+.card-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transition: all 0.5s ease;
+}
+
+.card-button:hover::before {
+  left: 100%;
+}
+
+/* Crystal background styling - updated for better visibility with magenta */
+.crystal-bg {
+  position: absolute;
+  background-image: url('/image/crystal.png');
+  background-size: contain;
+  background-position: right center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  opacity: 0.8;
+  pointer-events: none;
+  box-shadow: 0 0 80px 30px rgba(255, 0, 255, 0.4);
+  z-index: 5;
+}
+
+/* Responsive Crystal Background */
+.crystal-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background-image: url('/image/crystal.png');
+  background-size: contain;
+  background-position: right center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Responsive adjustments for crystal background */
+@media (max-width: 1280px) {
+  .crystal-background {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .crystal-background {
+    width: 80%;
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 768px) {
+  .crystal-background {
+    width: 90%;
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 640px) {
+  .crystal-background {
+    width: 100%;
+    background-position: 80% center;
+    opacity: 0.2;
+  }
+}
+
+/* Enhanced card hover effect that won't conflict with other classes */
+.card-hover-effect {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, box-shadow;
+  background: linear-gradient(to bottom, #210021, #180018);
+  border: 1px solid rgba(255, 0, 255, 0.1);
+  overflow: hidden;
+  z-index: 1;
+  height: 100%;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 30px -15px rgba(255, 0, 255, 0.5),
+    0 0 15px rgba(255, 0, 255, 0.4);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+/* Add glow effect when hovering over the card */
+.card-hover-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 0, 255, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.card-hover-effect:hover::after {
+  opacity: 0.6;
+}
+
+/* Enhanced shine effect for cards */
+.shine-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.card-hover-effect:hover .shine-effect {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* More subtle card hover effect */
+.card-hover-effect {
+  position: relative;
+  transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+  will-change: transform, box-shadow;
+  background: linear-gradient(to bottom, #210021, #180018);
+  border: 1px solid rgba(255, 0, 255, 0.1);
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3);
+}
+
+.card-hover-effect:hover {
+  box-shadow: 
+    0 22px 40px -15px rgba(255, 0, 255, 0.4),
+    0 0 15px rgba(255, 0, 255, 0.3);
+  border: 1px solid rgba(255, 0, 255, 0.25);
+  transform: translateY(-5px) !important;
+}
+
+/* Ensure the pink-animated-border works properly with the card hover effect */
+.pink-animated-border {
+  transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: transform;
+}
+
+.pink-animated-border:hover::before {
+  animation: rotate-border 2s linear infinite;
+  filter: contrast(1.1) brightness(1.05);
+  transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Ensure the pink-animated-border works properly with the card hover effect */
+.pink-animated-border:hover .card-hover-effect {
+  transform: translateY(0); /* Reset any transform from parent */
+}
+
+/* Animation for the left side menu */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Animation for the right side menu */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(30%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Pink Neon Border Bottom Effect - Updated with magenta */
+.neon-border-bottom {
+  border-bottom: 1px solid rgba(255, 0, 255, 0.6);
+  box-shadow: 
+    0 4px 4px -1px rgba(255, 0, 255, 0.15),
+    0 0 6px rgba(255, 0, 255, 0.2),
+    0 0 8px rgba(230, 0, 255, 0.15);
+  padding-bottom: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.neon-border-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.5), rgba(230, 0, 255, 0.5), rgba(255, 0, 255, 0.5), transparent);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.neon-border-bottom:hover {
+  box-shadow: 
+    0 2px 6px -1px rgba(255, 0, 255, 0.25),
+    0 0 8px rgba(255, 0, 255, 0.35),
+    0 0 12px rgba(230, 0, 255, 0.2);
+}
+
+/* Animated version with pulsing effect - Updated with reduced opacity */
+.neon-border-bottom-pulse {
+  border-bottom: 2px solid rgba(255, 0, 255, 0.6);
+  box-shadow: 
+    0 2px 4px -1px rgba(255, 0, 255, 0.15),
+    0 0 6px rgba(255, 0, 255, 0.2),
+    0 0 8px rgba(255, 0, 255, 0.15);
+  padding-bottom: 1px;
+  position: relative;
+  animation: neonPulse 2s infinite alternate;
+}
+
+.neon-border-bottom-pulse::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.5), rgba(230, 0, 255, 0.5), rgba(255, 0, 255, 0.5), transparent);
+  opacity: 0.6;
+  z-index: 1;
+  animation: neonPulseGlow 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% {
+    box-shadow: 
+      0 2px 4px -1px rgba(255, 0, 255, 0.1),
+      0 0 5px rgba(255, 0, 255, 0.15),
+      0 0 8px rgba(255, 0, 255, 0.1);
+  }
+  100% {
+    box-shadow: 
+      0 2px 6px -1px rgba(255, 0, 255, 0.2),
+      0 0 8px rgba(255, 0, 255, 0.3),
+      0 0 12px rgba(255, 0, 255, 0.2);
+  }
+}
+
+@keyframes neonPulseGlow {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Fixed navbar styling */
+nav.fixed {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Force GPU acceleration for smoother transitions */
+.gpu-accelerated {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Dedicated animated pink moving border - updated to have thinner border */
+.pink-animated-border {
+  position: relative;
+  z-index: 0;
+  transform: translateZ(0); /* Force hardware acceleration */
+  margin-bottom: 20px; /* Add margin to prevent overlap during hover */
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+  
+}
+
+.pink-animated-border::before {
+  content: '';
+  position: absolute;
+  top: -1px !important;          /* Force 1px border with !important */
+  left: -1px !important;         /* Force 1px border with !important */
+  right: -1px !important;        /* Force 1px border with !important */
+  bottom: -1px !important;       /* Force 1px border with !important */
+  z-index: -1;
+  border-radius: 0.75rem !important;  /* Force match with content radius */
+  background: linear-gradient(
+    var(--angle), 
+    #ff00ff,     /* magenta */
+    #ff33ff,     /* lighter magenta */
+    #ffdbf8,     /* whitish pink */
+    #fff0fa,     /* very light whitish pink */
+    #e600ff,     /* purple-magenta */
+    #cc00cc,     /* darker magenta */
+    #ff80ff      /* pastel magenta */
+  );
+  animation: rotate-border 3s linear infinite;
+  box-shadow: 
+    0 0 25px rgba(255, 0, 255, 0.6),
+    0 0 10px rgba(255, 0, 255, 0.4) inset;
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pink-animated-border:hover::before {
+  top: -2px !important;          /* Force 2px hover border with !important */
+  left: -2px !important;         /* Force 2px hover border with !important */
+  right: -2px !important;        /* Force 2px hover border with !important */
+  bottom: -2px !important;       /* Force 2px hover border with !important */
+  border-radius: 0.75rem !important;  /* Force match with content radius */
+  animation: rotate-border 1.5s linear infinite;
+  box-shadow: 
+    0 20px 40px -15px rgba(255, 0, 255, 0.7),
+    0 0 30px rgba(255, 0, 255, 0.6),
+    0 0 15px rgba(255, 0, 255, 0.4) inset;
+  filter: contrast(1.2) brightness(1.1);
+}
+
+/* Ensure the pink-animated-border works properly with the card hover effect */
+.pink-animated-border:hover {
+  transform: translateY(-10px); /* Single source of movement */
+}
+
+.pink-animated-border:hover::before {
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  background: linear-gradient(
+    var(--angle), 
+    #ff00ff,  
+    #ff33ff,  
+    #e600ff,  
+    #cc00cc,  
+    #ff80ff  
+  );
+  animation: rotate-border 1.5s linear infinite;
+  box-shadow: 
+    0 20px 40px -15px rgba(255, 0, 255, 0.7),
+    0 0 30px rgba(255, 0, 255, 0.6),
+    0 0 15px rgba(255, 0, 255, 0.4) inset;
+  filter: contrast(1.2) brightness(1.1);
+  /* No movement here - all movement handled by parent */
+}
+
+/* Completely disable any transform on the inner card */
+.card-hover-effect {
+  transition: box-shadow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: box-shadow;
+  background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: 100%; /* Fill parent completely */
+  transform: none !important; /* Ensure no transform is applied ever */
+}
+
+.card-hover-effect:hover {
+  transform: none !important; /* Ensure no transform is applied on hover */
+  box-shadow: 0 20px 40px -15px rgba(255, 0, 255, 0.4);
+  z-index: 1;
+}
+
+/* Enhanced card hover effect with synchronized animations */
+.card-hover-effect {
+  transition: box-shadow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  will-change: box-shadow;
+  background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: 100%; /* Make sure it fills the parent */
+}
+
+.card-hover-effect:hover {
+  transform: none !important; /* Remove the transform entirely */
+  box-shadow: 0 20px 40px -15px rgba(255, 0, 255, 0.4);
+  z-index: 1 !important;
+}
+
+/* Make the animation more obvious */
+@keyframes rotate-border-animation {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+/* Aurora animation */
+@keyframes aurora {
+  0% {
+    background-position: 50% 50%, 50% 50%;
+  }
+  50% {
+    background-position: 0% 100%, 50% 50%;
+  }
+  100% {
+    background-position: 50% 50%, 50% 50%;
+  }
+}
+
+.animate-aurora {
+  animation: aurora 10s ease infinite;
+}
+
+/* Button shimmer animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Add text truncation utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Continuous carousel styling and animations */
+.continuous-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.continuous-carousel {
+  display: flex;
+  animation: scroll-left 60s linear infinite;
+  width: fit-content;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+}
+
+/* Hover to pause animation */
+.continuous-carousel-container:hover .continuous-carousel {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Move to the left by exactly half of the items (first set of vouches) */
+    transform: translateX(-50%);
+  }
+}
+
+/* Improved Infinite Scroll Carousel */
+.infinite-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  padding: 10px 0;
+  /* Responsive padding adjustments */
+  padding-top: 25px;
+  padding-bottom: 15px;
+  /* Smooth gradient edges for better appearance */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+@media (min-width: 640px) {
+  .infinite-carousel-container {
+    padding: 30px 0;
+    padding-top: 45px;
+  }
+}
+
+.infinite-carousel {
+  display: flex;
+  animation: infinite-scroll 30s linear infinite; /* Faster on mobile for better UX */
+  width: fit-content;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .infinite-carousel {
+    animation-duration: 40s; /* Slower on larger screens */
+    gap: 16px;
+  }
+}
+
+.infinite-carousel:hover {
+  animation-play-state: paused;
+}
+
+.infinite-carousel-item {
+  flex: 0 0 auto;
+  padding: 0 1px;
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .infinite-carousel-item {
+    padding: 0 2px;
+  }
+}
+
+/* Double the animation for true infinite appearance */
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 8px)); /* Account for gap between items */
+  }
+}
+
+/* Different speeds for different screen sizes to maintain readability */
+@media (max-width: 480px) {
+  .infinite-carousel {
+    animation-duration: 25s; /* Even faster on very small screens */
+  }
+}
+
+/* Add xs breakpoint for extra small screens */
+@media (min-width: 480px) {
+  .xs\:w-\[320px\] {
+    width: 320px;
+  }
+}
+
+/* Improved Infinite Scroll Carousel */
+.infinite-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  /* Smooth gradient edges for better appearance */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.infinite-carousel {
+  display: flex;
+  animation: infinite-scroll 40s linear infinite; /* Reduced from 320s to 150s for faster scrolling */
+  width: fit-content;
+  gap: 16px;
+}
+
+.infinite-carousel-payment {
+  display: flex;
+  animation: infinite-scroll 20s linear infinite; /* Changed from 40s to 80s for slower scrolling */
+  width: fit-content;
+  gap: 16px;
+}
+
+.infinite-carousel:hover {
+  animation-play-state: paused;
+}
+
+.infinite-carousel-item {
+  flex: 0 0 auto;
+  padding: 0 6px;
+  transition: transform 0.3s ease;
+}
+
+/* Double the animation for true infinite appearance */
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 8px)); /* Account for gap between items */
+  }
+}
+
+/* Different speeds for different screen sizes to maintain readability */
+@media (max-width: 768px) {
+  .infinite-carousel {
+    animation-duration: 120s; /* Reduced from 310s to 120s for faster scrolling on mobile */
+  }
+  .infinite-carousel-payment {
+    animation-duration: 20s; /* Changed from 30s to 60s for slower scrolling on mobile */
+  }
+}
+
+/* Improved Infinite Scroll Carousel - Payment Products */
+.infinite-carousel-payment {
+  display: flex;
+  animation: infinite-scroll 50s linear infinite;
+  width: fit-content;
+  gap: 8px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .infinite-carousel-payment {
+    animation-duration: 30s; /* Faster on mobile */
+    gap: 4px;
+  }
+}
+
+/* Center the carousel items horizontally */
+.infinite-carousel-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Ensure products stay center-aligned */
+@media (min-width: 1921px) {
+  .infinite-carousel-container {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+}
+
+/* Modal Animation */
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.modal-enter {
+  animation: modal-fade-in 0.2s ease-out forwards;
+}
+
+.modal-exit {
+  animation: modal-fade-out 0.2s ease-in forwards;
+}
+
+/* Add fancy glow effect to proof button on hover */
+.proof-button-glow:hover {
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+}
+
+/* Also add a custom whitish pink gradient class for use with animate-gradient */
+.whitish-pink-gradient {
+  background: linear-gradient(
+    to right, 
+    #ff00ff,   /* magenta */
+    #ff33ff,   /* lighter magenta */
+    #e778d1,   /* whitish pink */
+    #fff0fa,   /* very light whitish pink */
+    #ff33ff    /* back to lighter magenta */
+  );
+  background-size: 200% auto;
+}
+
+/* Force background color for testimonial cards */
+.testimonial-bg-purple {
+  background-color: #210021 !important;
+  background: #210021 !important;
+  border-radius: 0.75rem;
+
+}
+
+/* Ensure testimonial buttons have the same background */
+.testimonial-bg-purple button {
+  background-color: #210021 !important;
+}
+
+/* Enhanced shine effect specifically for the About section */
+.hover-trigger:hover .shine-effect {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.3) 50%, /* Increased opacity to 0.3 from 0.2 */
+    rgba(255, 255, 255, 0) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* Make shine effect more visible by default in the About section */
+#about .shine-effect {
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Special non-hover contact border that still animates */
+.contact-border {
+  position: relative;
+  z-index: 0;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.contact-border::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  z-index: -1;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    var(--angle), 
+    #ff00ff,     /* magenta */
+    #ff33ff,     /* lighter magenta */
+    #ffdbf8,     /* whitish pink */
+    #fff0fa,     /* very light whitish pink */
+    #e600ff,     /* purple-magenta */
+    #cc00cc,     /* darker magenta */
+    #ff80ff      /* pastel magenta */
+  );
+  animation: rotate-border 3s linear infinite;
+  box-shadow: 
+    0 0 25px rgba(255, 0, 255, 0.6),
+    0 0 10px rgba(255, 0, 255, 0.4) inset;
+}
+
+/* Remove all the hover behaviors from contact-no-move completely */
+.contact-no-move,
+.contact-no-move:hover {
+  transform: none !important;
+}
+
+.contact-no-move::before,
+.contact-no-move:hover::before {
+  top: -1px !important;
+  left: -1px !important;
+  right: -1px !important;
+  bottom: -1px !important;
+  border-radius: 0.75rem !important;
+}
+
+/* Let the individual cards inside keep their hover effects */
+.contact-no-move .card-hover-effect:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 8px 16px rgba(255, 0, 255, 0.3);
+}
+
+/* Special override for contact section to prevent movement */
+.contact-no-move:hover {
+  transform: none !important;
+}
+
+.contact-no-move:hover::before {
+  top: -2px !important;
+  left: -2px !important;
+  right: -2px !important;
+  bottom: -2px !important;
+  border-radius: 0.75rem !important;
+  animation: rotate-border 1.5s linear infinite;
+  box-shadow: 
+    0 0 30px rgba(255, 0, 255, 0.6),
+    0 0 15px rgba(255, 0, 255, 0.4) inset;
+  filter: contrast(1.2) brightness(1.1);
+}
+
+/* Individual card hover effects inside contact section */
+.contact-no-move .card-hover-effect:hover {
+  transform: translateY(-5px) !important; /* Allow individual cards to move */
+  box-shadow: 0 8px 16px rgba(255, 0, 255, 0.3);
+}
+
+/* Footer specific styles - Add these at the end of your globals.css */
+.footer-card {
+  position: relative;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.footer-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(var(--angle), #ff00ff20, #ff33ff20);
+  border-radius: inherit;
+  z-index: -1;
+  animation: rotate-border 3s linear infinite;
+}
+
+.footer-link-hover {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.footer-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, #ff00ff, #ff33ff);
+  transition: width 0.3s ease;
+}
+
+.footer-link-hover:hover::after {
+  width: 100%;
+}
+
+/* About and Contact card background gradients */
+.about-card-gradient {
+  background: linear-gradient(
+    to bottom,
+    #210021 0%,
+    #210021 60%,
+    #2e0028 85%,
+    #380032 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card-gradient::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at bottom center,
+    rgba(255, 0, 255, 0.2) 0%,
+    rgba(255, 0, 255, 0.12) 30%,
+    rgba(255, 0, 255, 0.05) 60%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-card-gradient {
+  background: linear-gradient(
+    to bottom,
+    #210021 0%,
+    #210021 70%,
+    #2a0026 85%,
+    #330030 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card-gradient::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 70%;
+  background: radial-gradient(
+    ellipse at bottom center,
+    rgba(255, 0, 255, 0.25) 0%,
+    rgba(255, 0, 255, 0.15) 20%,
+    rgba(255, 0, 255, 0.07) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure the content is on top of the gradient */
+.about-card-gradient > *, .contact-card-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Add these styles to the end of your globals.css file */
+
+/* Custom scrollbar styling for the modal */
+.styled-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.styled-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 0, 255, 0.05);
+  border-radius: 10px;
+}
+
+.styled-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 0, 255, 0.3);
+  border-radius: 10px;
+}
+
+.styled-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 0, 255, 0.5);
+}
+
+/* For Firefox */
+.styled-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 0, 255, 0.3) rgba(255, 0, 255, 0.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Anti-Skid Protection Styles */
+.disable-selection {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Prevent image dragging */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* Add hidden overlay for additional protection */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  /* Use transparent background to prevent visual changes */
+  background: transparent; 
+}
+
+/* Add site protection watermarks */
+.protect-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.protect-content::before {
+  content: 'CleanBoosts';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 5rem;
+  opacity: 0.03;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+}
+
+

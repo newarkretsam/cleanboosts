@@ -1,0 +1,104 @@
+.pageLoaderContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #110011;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-image: url('/image/bg.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.loaderContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageContainer {
+  margin-bottom: 20px;
+}
+
+.loaderImage {
+  animation: colorize 5s ease-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.8));
+}
+
+.loaderText {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  display: flex;
+}
+
+.loaderText span {
+  animation: textPulse 2s ease-in-out infinite;
+  background: linear-gradient(90deg, #ff00ff, #ff33ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Stagger the animations for each letter */
+.loaderText span:nth-child(1) { animation-delay: 0.0s; }
+.loaderText span:nth-child(2) { animation-delay: 0.1s; }
+.loaderText span:nth-child(3) { animation-delay: 0.2s; }
+.loaderText span:nth-child(4) { animation-delay: 0.3s; }
+.loaderText span:nth-child(5) { animation-delay: 0.4s; }
+.loaderText span:nth-child(6) { animation-delay: 0.5s; }
+.loaderText span:nth-child(7) { animation-delay: 0.6s; }
+.loaderText span:nth-child(8) { animation-delay: 0.7s; }
+.loaderText span:nth-child(9) { animation-delay: 0.8s; }
+.loaderText span:nth-child(10) { animation-delay: 0.9s; }
+.loaderText span:nth-child(11) { animation-delay: 1.0s; }
+
+@keyframes colorize {
+  0% {
+    filter: grayscale(0%) drop-shadow(0 0 20px rgba(255, 0, 255, 0.8));
+
+  }
+  50% {
+    filter: grayscale(100%) drop-shadow(0 0 5px rgba(255, 0, 255, 0.3));
+  }
+  100% {
+    filter: grayscale(30%) drop-shadow(0 0 20px rgba(255, 0, 255, 0.8));
+
+  }
+}
+
+/* Fixed spin animation (renamed from rotate) */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: perspective(400px) rotateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateY(360deg);
+  }
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
