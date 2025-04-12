@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-static";
-
 // Fetch store data from the external API
 async function fetchStoreData() {
   try {

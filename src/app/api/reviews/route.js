@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-static";
-
 export async function GET() {
   try {
     const response = await fetch("https://myvouch.es/api/vouches/cleanboosts");
