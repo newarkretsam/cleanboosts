@@ -18,11 +18,11 @@ import {
  * @param {boolean} options.showConsoleWarning - Show warning in console
  */
 export default function useAntiSkid({
-  disableSelection = true,
-  disableContextMenu = true,
-  blockDevKeys = true,
-  obscureOnDevTools = true,
-  showConsoleWarning = true
+  disableSelection = false,
+  disableContextMenu = false,
+  blockDevKeys = false,
+  obscureOnDevTools = false,
+  showConsoleWarning = false
 } = {}) {
   const [devToolsOpen, setDevToolsOpen] = useState(false);
   
