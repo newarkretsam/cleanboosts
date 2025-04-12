@@ -1,67 +1,32 @@
 import { NextResponse } from "next/server";
 
-const FALLBACK_TOS = `
-# Terms of Service
+const FALLBACK_TOS = "# Default Terms of Service\n\nThese are the default terms of service for CleanBoosts.";
 
-## 1. Introduction
-Welcome to CleanBoosts. By accessing our services, you agree to these Terms of Service.
-
-## 2. Service Description
-CleanBoosts provides Discord-related services including server boosts, nitro, and other digital products.
-
-## 3. User Responsibilities
-Users must comply with Discord's Terms of Service and our guidelines when using our products.
-
-## 4. Refund Policy
-All sales are final. We do not offer refunds once services are delivered.
-`;
-
-async function fetchStoreData() {
+export async function GET() {
   try {
-    const response = await fetch('https://dash.sellhub.cx/api/sellhub/store', {
-      method: 'GET',
+    // Fetch the store data
+    const response = await fetch("https://dash.sellhub.cx/api/sellhub/store", {
       headers: {
         "Authorization": process.env.SELLHUB_API_TOKEN
       }
     });
 
     if (!response.ok) {
-      console.warn(`API returned status: ${response.status}. Using fallback data.`);
-      return { 
-        data: { 
-          store: { 
-            tos: FALLBACK_TOS 
-          } 
-        } 
-      };
+      throw new Error(`API request failed with status: ${response.status}`);
     }
 
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching store data:", error);
-    return { 
-      data: { 
-        store: { 
-          tos: FALLBACK_TOS 
-        } 
-      } 
-    };
-  }
-}
-
-export async function GET() {
-  try {
-    const storeData = await fetchStoreData();
+    const data = await response.json();
     
-    if (!storeData || !storeData.data || !storeData.data.store) {
+    if (!data?.data?.store) {
       return NextResponse.json({ 
         success: true, 
         tos: FALLBACK_TOS 
       }, { status: 200 });
     }
     
-    const tos = storeData.data.store.tos || FALLBACK_TOS;
+    const tos = data.data.store.tos || FALLBACK_TOS;
     
+    // Return the TOS as JSON with a 200 OK status
     return NextResponse.json({ 
       success: true, 
       tos: tos 
@@ -69,6 +34,7 @@ export async function GET() {
   } catch (error) {
     console.error("Error fetching Terms of Service:", error);
     
+    // Return fallback TOS instead of error
     return NextResponse.json({ 
       success: true, 
       tos: FALLBACK_TOS,
