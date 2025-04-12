@@ -1,6 +1,21 @@
 import { NextResponse } from "next/server";
 
-// Fetch store data from the external API
+const FALLBACK_TOS = `
+# Terms of Service
+
+## 1. Introduction
+Welcome to CleanBoosts. By accessing our services, you agree to these Terms of Service.
+
+## 2. Service Description
+CleanBoosts provides Discord-related services including server boosts, nitro, and other digital products.
+
+## 3. User Responsibilities
+Users must comply with Discord's Terms of Service and our guidelines when using our products.
+
+## 4. Refund Policy
+All sales are final. We do not offer refunds once services are delivered.
+`;
+
 async function fetchStoreData() {
   try {
     const response = await fetch('https://dash.sellhub.cx/api/sellhub/store', {
@@ -12,31 +27,41 @@ async function fetchStoreData() {
 
     if (!response.ok) {
       console.warn(`API returned status: ${response.status}. Using fallback data.`);
-      
+      return { 
+        data: { 
+          store: { 
+            tos: FALLBACK_TOS 
+          } 
+        } 
+      };
     }
 
     return await response.json();
   } catch (error) {
     console.error("Error fetching store data:", error);
+    return { 
+      data: { 
+        store: { 
+          tos: FALLBACK_TOS 
+        } 
+      } 
+    };
   }
 }
 
 export async function GET() {
   try {
-    // Fetch the store data, falling back to hardcoded data if needed
     const storeData = await fetchStoreData();
     
-    // Extract the TOS from the store data
-    const tos = storeData.data.store.tos;
-    
-    if (!tos) {
+    if (!storeData || !storeData.data || !storeData.data.store) {
       return NextResponse.json({ 
-        success: false, 
-        error: "Terms of Service not found" 
-      }, { status: 404 });
+        success: true, 
+        tos: FALLBACK_TOS 
+      }, { status: 200 });
     }
     
-    // Return the TOS as JSON with a 200 OK status
+    const tos = storeData.data.store.tos || FALLBACK_TOS;
+    
     return NextResponse.json({ 
       success: true, 
       tos: tos 
@@ -44,10 +69,10 @@ export async function GET() {
   } catch (error) {
     console.error("Error fetching Terms of Service:", error);
     
-    // Return an error response
     return NextResponse.json({ 
-      success: false, 
-      error: "Failed to retrieve Terms of Service" 
-    }, { status: 500 });
+      success: true, 
+      tos: FALLBACK_TOS,
+      fromFallback: true
+    }, { status: 200 });
   }
 }
