@@ -16,16 +16,21 @@ export const detectDevTools = () => {
     
     // Check for size discrepancies that occur when dev tools are open
     const checkWindowSize = () => {
-      // Account for browser zoom level
+      // Get zoom level
       const zoomLevel = window.devicePixelRatio || 1;
       
-      // Adjust thresholds based on zoom level
-      const adjustedWidthThreshold = widthThreshold * zoomLevel;
-      const adjustedHeightThreshold = heightThreshold * zoomLevel;
+      // Calculate expected differences based on zoom
+      const expectedWidthDiff = window.outerWidth * (1 - 1/zoomLevel);
+      const expectedHeightDiff = window.outerHeight * (1 - 1/zoomLevel);
       
+      // Calculate actual differences
+      const actualWidthDiff = window.outerWidth - window.innerWidth;
+      const actualHeightDiff = window.outerHeight - window.innerHeight;
+      
+      // Compare with threshold, accounting for expected zoom differences
       if (
-        window.outerWidth - window.innerWidth > adjustedWidthThreshold ||
-        window.outerHeight - window.innerHeight > adjustedHeightThreshold
+        Math.abs(actualWidthDiff - expectedWidthDiff) > widthThreshold ||
+        Math.abs(actualHeightDiff - expectedHeightDiff) > heightThreshold
       ) {
         emitEvent();
         return true;
