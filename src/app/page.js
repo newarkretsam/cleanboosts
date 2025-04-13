@@ -641,7 +641,7 @@ export default function Home() {
                               <div className="shine-effect"></div>
                               <div className="w-16 h-16 border border-[#ff00ff]/30 rounded-full flex items-center justify-center mx-auto mb-4 bg-gradient-to-br from-[#ff00ff]/10 via-[#ff33ff]/10 to-[#cc00cc]/10 animate-border-pulse">
                               <Image
-                                src="/image/purplestar.png"
+                                src="/image/purplestar.webp"
                                 alt="Trusted Reputation"
                                 width={100}
                                 height={100}
